@@ -37,6 +37,9 @@ dependencies {
 
     // common-lib
     implementation files('../common-lib/build/libs/common-lib.jar')
+
+    // utils
+   	implementation 'org.apache.commons:commons-lang3:3.17.0'
 }
 
 tasks.named('test') {
