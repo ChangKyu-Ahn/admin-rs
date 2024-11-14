@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class CommonConfig extends CommonConfigurer {
+
 	@Bean
 	public ObjectMapper objectMapper() {
 		return customObjectMapper();
@@ -22,6 +23,6 @@ public class CommonConfig extends CommonConfigurer {
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-	    return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
 	}
 }
