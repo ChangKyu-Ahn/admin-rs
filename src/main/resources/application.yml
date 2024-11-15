@@ -3,6 +3,18 @@ server:
 
 spring:
   application:
-    name: admin-rs
+    name: user-rs
   main:
     banner-mode: off
+  datasource:
+    url: jdbc:log4jdbc:h2:mem:testdb;
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
