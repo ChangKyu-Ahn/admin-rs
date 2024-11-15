@@ -1,4 +1,4 @@
-package co.kr.user.infra.security;
+package co.kr.user.infra.config;
 
 import co.kr.common.security.jwt.JWTRequestFilter;
 import co.kr.common.security.jwt.JwtUserDetailsService;

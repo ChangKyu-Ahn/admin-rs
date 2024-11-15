@@ -30,6 +30,7 @@ public class UserManagementRDBAdapter implements UserManagementOutputPort {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Optional<User> optionalRetrieve(String userId) {
 		return userDataRepository.findByUserId(userId)
 			.map(UserMapper::dataToDomain);
