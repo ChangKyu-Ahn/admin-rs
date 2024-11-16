@@ -7,7 +7,6 @@ import co.kr.user.modules.domain.mapper.UserMapper;
 import co.kr.user.modules.framework.output.rdb.data.UserData;
 import co.kr.user.modules.framework.output.rdb.mapper.UserRDBMapper;
 import co.kr.user.modules.framework.output.rdb.repository.UserDataRepository;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,20 +25,14 @@ public class UserManagementRDBAdapter implements UserManagementOutputPort {
 	@Override
 	@Transactional(readOnly = true)
 	public User retrieve(String userId) {
-		return optionalRetrieve(userId).orElseThrow(NotExistDataException::new);
-	}
-
-	@Override
-	@Transactional(readOnly = true)
-	public Optional<User> optionalRetrieve(String userId) {
-		return userDataRepository.findByUserId(userId)
-			.map(UserMapper::dataToDomain);
+		UserData userData = getUserData(userId);
+		return UserMapper.dataToDomain(userData);
 	}
 
 	@Override
 	@Transactional
 	public User update(String userId, User user) {
-		UserData data = userDataRepository.findByUserId(userId).orElseThrow(NotExistDataException::new);
+		UserData data = getUserData(userId);
 
 		data.update(user);
 
@@ -55,5 +48,9 @@ public class UserManagementRDBAdapter implements UserManagementOutputPort {
 	@Transactional(readOnly = true)
 	public boolean isExistByUserId(String userId) {
 		return userDataRepository.existsByUserId(userId);
+	}
+
+	private UserData getUserData(String userId) {
+		return userDataRepository.findByUserId(userId).orElseThrow(NotExistDataException::new);
 	}
 }

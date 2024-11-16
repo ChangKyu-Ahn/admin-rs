@@ -6,7 +6,6 @@ import co.kr.user.modules.domain.entity.User;
 import co.kr.user.modules.domain.mapper.UserMapper;
 import co.kr.user.modules.domain.service.UserService;
 import co.kr.user.modules.framework.input.rest.dto.UserLoginDto;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,15 +16,8 @@ public class UserLoginInputPort extends AbstractUserInputPort implements UserLog
 	@Override
 	public JwtUserDetailResponse login(UserLoginDto userLoginDto) throws Exception {
 		User request = UserMapper.loginDtoToDomain(userLoginDto);
-		User savedUser = getSavedUser(request);
+		User saved = userManagementOutputPort.retrieve(request.getUserId());
 
-		return UserService.creatToken(request, savedUser);
-	}
-
-	private User getSavedUser(User request) {
-		return Optional.ofNullable(request)
-			.map(User::getUserId)
-			.flatMap(userId -> userManagementOutputPort.optionalRetrieve(userId))
-			.orElse(null);
+		return UserService.creatToken(request, saved);
 	}
 }
