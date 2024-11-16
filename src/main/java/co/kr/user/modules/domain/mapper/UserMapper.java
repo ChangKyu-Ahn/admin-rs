@@ -1,5 +1,6 @@
 package co.kr.user.modules.domain.mapper;
 
+import co.kr.common.code.UserType;
 import co.kr.common.domain.vo.Identifier;
 import co.kr.common.domain.vo.Password;
 import co.kr.user.modules.domain.entity.User;
@@ -10,12 +11,13 @@ import co.kr.user.modules.framework.input.rest.dto.UserLoginDto;
 import co.kr.user.modules.framework.input.rest.dto.UserResponse;
 import co.kr.user.modules.framework.input.rest.dto.UserUpdate;
 import co.kr.user.modules.framework.output.rdb.data.UserData;
+import org.apache.commons.lang3.ObjectUtils;
 
 public class UserMapper {
 	public static UserBuilder<?, ?> dtoToDomainBuilder(UserDto userDto) {
 		return User.builder()
 			.name(userDto.getName())
-			.type(userDto.getType())
+			.type(ObjectUtils.defaultIfNull(userDto.getType(), UserType.CUSTOMER))
 			.password(Password.newInstanceWithEncrypted(userDto.getPassword()));
 	}
 
