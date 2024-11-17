@@ -1,5 +1,6 @@
 package co.kr.user.modules.framework.input.rest;
 
+import co.kr.common.api.BoardApi;
 import co.kr.common.code.UserType;
 import co.kr.common.domain.vo.Identifier;
 import co.kr.common.security.jwt.dto.JwtUserDetailResponse;
@@ -35,6 +36,7 @@ public class ExternalUserManagementAdapter {
 	private final UserDeleteUsecase userDeleteUsecase;
 	private final UserRetrieveUsecase userRetrieveUsecase;
 	private final UserLoginUsecase userLoginUsecase;
+	private final BoardApi boardApi;
 
 	/**
 	 * <pre>

@@ -41,7 +41,8 @@ public class UserManagementRDBAdapter implements UserManagementOutputPort {
 
 	@Override
 	public void delete(String userId) {
-		userDataRepository.deleteByUserId(userId);
+		UserData userData = getUserData(userId);
+		userDataRepository.delete(userData);
 	}
 
 	@Override

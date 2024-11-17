@@ -18,3 +18,7 @@ spring:
     console:
       enabled: true
       path: /h2-console
+
+system:
+  api:
+    board: http://localhost:8220/board
