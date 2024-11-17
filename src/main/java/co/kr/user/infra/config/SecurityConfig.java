@@ -43,7 +43,6 @@ public class SecurityConfig {
 
 	private String[] excludeTargetArray() {
 		return new String[]{
-				"/h2-console/**",
 				"/users/login",
 				"/v1/users/sign",
 				"/v1/users/login",
