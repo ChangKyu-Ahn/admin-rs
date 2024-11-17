@@ -1,7 +1,6 @@
 package co.kr.user.modules.framework.input.rest;
 
 import co.kr.common.api.BoardApi;
-import co.kr.common.code.UserType;
 import co.kr.common.domain.vo.Identifier;
 import co.kr.common.security.jwt.dto.JwtUserDetailResponse;
 import co.kr.common.util.SecurityUtil;
@@ -62,7 +61,6 @@ public class ExternalUserManagementAdapter {
 	@PostMapping("/sign")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Identifier<String> create(@RequestBody @Valid UserCreate userCreate) {
-		userCreate.setType(UserType.CUSTOMER);
 		return userCreateUsecase.create(userCreate);
 	}
 
@@ -87,7 +85,6 @@ public class ExternalUserManagementAdapter {
 	 */
 	@PutMapping
 	public Identifier<String> update(@RequestBody @Valid UserUpdate userUpdate) {
-		userUpdate.setType(UserType.CUSTOMER);
 		return userUpdateUsecase.update(getUserId(), userUpdate);
 	}
 

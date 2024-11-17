@@ -2,6 +2,7 @@ package co.kr.user.modules.framework.input.rest.dto;
 
 
 import co.kr.common.code.UserType;
+import co.kr.common.util.SecurityUtil;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -25,4 +26,8 @@ public class UserDto{
 	private String password;
 
 	private UserType type;
+
+	public UserType getType() {
+		return SecurityUtil.isAdmin() ? this.type : UserType.CUSTOMER;
+	}
 }
